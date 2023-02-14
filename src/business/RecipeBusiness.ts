@@ -1,7 +1,7 @@
 import { CustomError } from "../error/CustomError"
-import { MissingDescription, MissingTitle } from "../error/recipeErrors"
+import { MissingDescription, MissingRecipeId, MissingTitle, NoRecipeFound } from "../error/recipeErrors"
 import { MissingToken, Unauthorized } from "../error/userErrors"
-import { inputCreateRecipeDTO, Recipe } from "../model/Recipe"
+import { inputCreateRecipeDTO, inputGetRecipeDTO, Recipe } from "../model/Recipe"
 import { Authenticator } from "../services/Authenticator"
 import { RecipeRepository } from "./RecipeRepository"
 import { UserRepository } from "./UserRepository"
@@ -61,6 +61,35 @@ export class RecipeBusiness {
             for (let item of followingUsers) {
                 const recipe = await this.recipeDatabase.getRecipes(item.fk_user_id)
                 result.push(...recipe)
+            }
+
+            return result
+
+        } catch (err: any) {
+            throw new CustomError(err.statusCode, err.message)
+        }
+    }
+
+
+    getRecipeById = async (input: inputGetRecipeDTO): Promise<Recipe> => {
+        try {
+            if (!input.token) {
+                throw new MissingToken()
+            }
+            if (!input.id) {
+                throw new MissingRecipeId()
+            }
+
+            const authenticator = new Authenticator()
+            const tokenIsValid = await authenticator.getTokenData(input.token)
+
+            if (!tokenIsValid) {
+                throw new Unauthorized()
+            }
+            
+            const result = await this.recipeDatabase.getRecipeById(input.id)
+            if (!result) {
+                throw new NoRecipeFound()
             }
 
             return result

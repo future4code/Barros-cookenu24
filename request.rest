@@ -32,6 +32,12 @@ Content-Type: application/json
 
 
 ###
+POST http://localhost:3003/users/sd4iu-6r84cd-askjbdaj-564sd46ad-kjsd
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjJhYzA5NWIxLTc3NmYtNDFkNC05NDM1LTVhMmNmZDEwZmM2MiIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NzYzMzAzNDgsImV4cCI6MTY3NjMzMzk0OH0._9t7J-N_Tz43p2Gzp_sHc0P_iOJDG9jOeiSysLAtAlY
+Content-Type: application/json
+
+
+###
 POST http://localhost:3003/recipes/create
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjJhYzA5NWIxLTc3NmYtNDFkNC05NDM1LTVhMmNmZDEwZmM2MiIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NzYzMzAzNDgsImV4cCI6MTY3NjMzMzk0OH0._9t7J-N_Tz43p2Gzp_sHc0P_iOJDG9jOeiSysLAtAlY
 Content-Type: application/json
@@ -43,12 +49,12 @@ Content-Type: application/json
 
 
 ###
-POST http://localhost:3003/users/sd4iu-6r84cd-askjbdaj-564sd46ad-kjsd
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjJhYzA5NWIxLTc3NmYtNDFkNC05NDM1LTVhMmNmZDEwZmM2MiIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NzYzMzAzNDgsImV4cCI6MTY3NjMzMzk0OH0._9t7J-N_Tz43p2Gzp_sHc0P_iOJDG9jOeiSysLAtAlY
+GET http://localhost:3003/recipes
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjJhYzA5NWIxLTc3NmYtNDFkNC05NDM1LTVhMmNmZDEwZmM2MiIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NzYzMzU2MzQsImV4cCI6MTY3NjMzOTIzNH0.i-iV_D66eRv-w2r0c4yGmJo7sxvcs8fQHbbxk4iCD-o
 Content-Type: application/json
 
 
 ###
-GET http://localhost:3003/recipes
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjJhYzA5NWIxLTc3NmYtNDFkNC05NDM1LTVhMmNmZDEwZmM2MiIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NzYzMzU2MzQsImV4cCI6MTY3NjMzOTIzNH0.i-iV_D66eRv-w2r0c4yGmJo7sxvcs8fQHbbxk4iCD-o
+GET http://localhost:3003/recipes/1
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjJhYzA5NWIxLTc3NmYtNDFkNC05NDM1LTVhMmNmZDEwZmM2MiIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NzY0MTYzMTMsImV4cCI6MTY3NjQxOTkxM30.8UT57VuKUCQVtqARp4v6OjFn8y0upwpcSHo-AKWyIW0
 Content-Type: application/json

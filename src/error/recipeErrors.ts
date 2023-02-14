@@ -12,3 +12,15 @@ export class MissingDescription extends CustomError {
         super(422, "Provide the description of the recipe.")
     }
 }
+
+export class MissingRecipeId extends CustomError {
+    constructor () {
+        super(422, "Provide the recipe id.")
+    }
+}
+
+export class NoRecipeFound extends CustomError {
+    constructor () {
+        super(404, "No recipe found.")
+    }
+}
