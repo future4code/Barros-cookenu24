@@ -18,7 +18,7 @@ export class RecipeDatabase extends BaseDatabase implements RecipeRepository {
 
     getRecipes = async (userId: string): Promise<Recipe[]> => {
         try {
-            return await BaseDatabase.connection(this.TABLE_NAME).select().where("fk_user_id", userId)
+            return await BaseDatabase.connection(this.TABLE_NAME).select().where("fk_user_id", userId).orderBy("created_at", "desc")
         } catch (err: any) {
             throw new CustomError(err.statusCode, err.message)
         }

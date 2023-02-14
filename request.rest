@@ -50,7 +50,7 @@ Content-Type: application/json
 
 ###
 GET http://localhost:3003/recipes
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjJhYzA5NWIxLTc3NmYtNDFkNC05NDM1LTVhMmNmZDEwZmM2MiIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NzYzMzU2MzQsImV4cCI6MTY3NjMzOTIzNH0.i-iV_D66eRv-w2r0c4yGmJo7sxvcs8fQHbbxk4iCD-o
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjJhYzA5NWIxLTc3NmYtNDFkNC05NDM1LTVhMmNmZDEwZmM2MiIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NzY0MTYzMTMsImV4cCI6MTY3NjQxOTkxM30.8UT57VuKUCQVtqARp4v6OjFn8y0upwpcSHo-AKWyIW0
 Content-Type: application/json
 
 
