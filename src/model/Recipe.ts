@@ -6,3 +6,9 @@ export class Recipe {
         this.fk_user_id = fk_user_id
     }
 }
+
+export interface inputCreateRecipeDTO {
+    title: string,
+    description: string,
+    token: string
+}

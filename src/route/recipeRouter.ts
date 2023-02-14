@@ -8,3 +8,5 @@ export const recipeRouter = express.Router()
 const recipeDatabase = new RecipeDatabase()
 const recipeBusiness = new RecipeBusiness(recipeDatabase)
 const recipeController = new RecipeController(recipeBusiness)
+
+recipeRouter.post("/create", recipeController.createRecipe)

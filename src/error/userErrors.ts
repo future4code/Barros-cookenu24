@@ -13,6 +13,12 @@ export class MissingUserName extends CustomError {
     }
 }
 
+export class MissingUserId extends CustomError {
+    constructor () {
+        super(422, "Provide the user id.")
+    }
+}
+
 export class MissingEmail extends CustomError {
     constructor () {
         super(422, "Provide the email.")
@@ -28,6 +34,12 @@ export class MissingPassword extends CustomError {
 export class MissingRole extends CustomError {
     constructor () {
         super(422, "Provide the user role.")
+    }
+}
+
+export class MissingToken extends CustomError {
+    constructor () {
+        super(422, "Provide the token.")
     }
 }
 
@@ -58,5 +70,17 @@ export class IncorrectPassword extends CustomError {
 export class DuplicateEmail extends CustomError {
     constructor () {
         super(409, "Email already in use.")
+    }
+}
+
+export class UserNotFound extends CustomError {
+    constructor () {
+        super(404, "User not found.")
+    }
+}
+
+export class InvalidUserId extends CustomError {
+    constructor () {
+        super(401, "The user cannot follow his/her own account.")
     }
 }
