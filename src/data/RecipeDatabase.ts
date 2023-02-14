@@ -23,4 +23,14 @@ export class RecipeDatabase extends BaseDatabase implements RecipeRepository {
             throw new CustomError(err.statusCode, err.message)
         }
     }
+
+
+    getRecipeById = async (id: string): Promise<any> => {
+        try {
+            const result = await BaseDatabase.connection(this.TABLE_NAME).select().where("id", id)
+            return result[0]
+        } catch (err: any) {
+            throw new CustomError(err.statusCode, err.message)
+        }
+    }
 }
