@@ -162,4 +162,40 @@ export class UserBusiness {
             throw new CustomError(err.statusCode, err.message)
         }
     }
+
+
+    getUserById = async (input: inputFollowUserDTO): Promise<returnUserInfoDTO> => {
+        try {
+            if (!input.token) {
+                throw new MissingToken()
+            }
+
+            if (!input.userId) {
+                throw new MissingUserId()
+            }
+
+            const userIdExists = await this.userDatabase.getUserBy("id", input.userId)
+            if (!userIdExists) {
+                throw new UserNotFound()
+            }
+
+            const authenticator = new Authenticator()
+            const tokenIsValid = await authenticator.getTokenData(input.token)
+
+            if (!tokenIsValid) {
+                throw new Unauthorized()
+            }
+
+            const result: returnUserInfoDTO = {
+                id: userIdExists.id,
+                name: userIdExists.name,
+                email: userIdExists.email
+            }
+
+            return result
+
+        } catch (err: any) {
+            throw new CustomError(err.statusCode, err.message)
+        }
+    }
 }
