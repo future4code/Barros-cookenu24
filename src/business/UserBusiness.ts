@@ -1,6 +1,6 @@
 import { CustomError } from "../error/CustomError"
-import { DuplicateEmail, IncorrectPassword, InvalidEmail, InvalidPassword, InvalidUserRole, MissingEmail, MissingPassword, MissingRole, MissingUserName } from "../error/userErrors"
-import { inputLoginDTO, inputSignupDTO, User } from "../model/User"
+import { DuplicateEmail, IncorrectPassword, InvalidEmail, InvalidPassword, InvalidUserId, InvalidUserRole, MissingEmail, MissingPassword, MissingRole, MissingToken, MissingUserId, MissingUserName, Unauthorized, UserNotFound } from "../error/userErrors"
+import { inputLoginDTO, inputSignupDTO, User, returnUserInfoDTO, inputFollowUserDTO, insertFollowerDTO } from "../model/User"
 import { Authenticator } from "../services/Authenticator"
 import { HashManager } from "../services/HashManager"
 import { IdGenerator } from "../services/IdGenerator"
@@ -86,6 +86,77 @@ export class UserBusiness {
             const token = await authenticator.generateToken({id: userEmail.id, role: userEmail.role})
             
             return token
+
+        } catch (err: any) {
+            throw new CustomError(err.statusCode, err.message)
+        }
+    }
+
+
+    getUserInfo = async (token: string): Promise<returnUserInfoDTO> => {
+        try {
+            if (!token) {
+                throw new MissingToken()
+            }
+
+            const authenticator = new Authenticator()
+            const tokenIsValid = await authenticator.getTokenData(token)
+
+            if (!tokenIsValid) {
+                throw new Unauthorized()
+            }
+
+            const user = await this.userDatabase.getUserBy("id", tokenIsValid.id)
+            
+            const result: returnUserInfoDTO = {
+                id: user.id,
+                name: user.name,
+                email: user.email
+            }
+
+            return result
+
+        } catch (err: any) {
+            throw new CustomError(err.statusCode, err.message)
+        }
+    }
+
+
+    followUser = async (input: inputFollowUserDTO): Promise<void> => {
+        try {
+            if (!input.token) {
+                throw new MissingToken()
+            }
+
+            if (!input.userId) {
+                throw new MissingUserId()
+            }
+
+            const userIdExists = await this.userDatabase.getUserBy("id", input.userId)
+            if (!userIdExists) {
+                throw new UserNotFound()
+            }
+
+            const authenticator = new Authenticator()
+            const tokenIsValid = await authenticator.getTokenData(input.token)
+
+            if (!tokenIsValid) {
+                throw new Unauthorized()
+            }
+
+            if (tokenIsValid.id === input.userId) {
+                throw new InvalidUserId()
+            }
+
+            const id = await new IdGenerator().generateId()
+
+            const newFollower: insertFollowerDTO = {
+                id,
+                fk_user_id: input.userId,
+                fk_follower_id: tokenIsValid.id
+            }
+
+            await this.userDatabase.followUser(newFollower)
 
         } catch (err: any) {
             throw new CustomError(err.statusCode, err.message)

@@ -1,6 +1,6 @@
 import { Request, Response } from "express"
 import { UserBusiness } from "../business/UserBusiness"
-import { inputLoginDTO, inputSignupDTO } from "../model/User"
+import { inputFollowUserDTO, inputLoginDTO, inputSignupDTO } from "../model/User"
 
 
 export class UserController {
@@ -35,6 +35,35 @@ export class UserController {
             const token = await this.userBusiness.login(input)
 
             res.status(201).send({token})
+            
+        } catch (err: any) {
+            res.status(err.statusCode || 400).send(err.message || err.sqlMessage)
+        }
+    }
+
+
+    getUserInfo = async (req: Request, res: Response): Promise<void> => {
+        try {
+            const token = req.headers.authorization as string
+            const result = await this.userBusiness.getUserInfo(token)
+
+            res.status(200).send(result)
+            
+        } catch (err: any) {
+            res.status(err.statusCode || 400).send(err.message || err.sqlMessage)
+        }
+    }
+
+
+    followUser = async (req: Request, res: Response): Promise<void> => {
+        try {
+            const input: inputFollowUserDTO = {
+                userId: req.params.userId,
+                token: req.headers.authorization as string
+            }
+
+            await this.userBusiness.followUser(input)
+            res.status(201).send(`Success! The user is now following the user id ${input.userId}.`)
             
         } catch (err: any) {
             res.status(err.statusCode || 400).send(err.message || err.sqlMessage)

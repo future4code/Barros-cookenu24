@@ -24,3 +24,20 @@ export interface inputLoginDTO {
     email: string,
     password: string
 }
+
+export interface returnUserInfoDTO {
+    id: string,
+    name: string,
+    email: string
+}
+
+export interface inputFollowUserDTO {
+    userId: string,
+    token: string
+}
+
+export interface insertFollowerDTO {
+    id: string,
+    fk_user_id: string,
+    fk_follower_id: string
+}
