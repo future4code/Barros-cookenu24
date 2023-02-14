@@ -1,6 +1,6 @@
 import { UserRepository } from "../business/UserRepository"
 import { CustomError } from "../error/CustomError"
-import { insertFollowerDTO, User } from "../model/User"
+import { insertFollowerDTO, returnFollowingUsersDTO, User } from "../model/User"
 import { BaseDatabase } from "./BaseDatabase"
 
 
@@ -29,6 +29,15 @@ export class UserDatabase extends BaseDatabase implements UserRepository {
     followUser = async (newFollower: insertFollowerDTO): Promise<void> => {
         try {
             await BaseDatabase.connection("cookenu_followers").insert(newFollower)
+        } catch (err: any) {
+            throw new CustomError(err.statusCode, err.message)
+        }
+    }
+
+
+    getFollowingUsers = async (id: string): Promise<returnFollowingUsersDTO[]> => {
+        try {
+            return await BaseDatabase.connection("cookenu_followers").select("fk_user_id").where("fk_follower_id", id)
         } catch (err: any) {
             throw new CustomError(err.statusCode, err.message)
         }

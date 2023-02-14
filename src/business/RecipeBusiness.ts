@@ -4,10 +4,11 @@ import { MissingToken, Unauthorized } from "../error/userErrors"
 import { inputCreateRecipeDTO, Recipe } from "../model/Recipe"
 import { Authenticator } from "../services/Authenticator"
 import { RecipeRepository } from "./RecipeRepository"
+import { UserRepository } from "./UserRepository"
 
 
 export class RecipeBusiness {
-    constructor (private recipeDatabase: RecipeRepository) {}
+    constructor (private recipeDatabase: RecipeRepository, private userDatabase: UserRepository) {}
 
     createRecipe = async (input: inputCreateRecipeDTO): Promise<void> => {
         try {
@@ -34,6 +35,35 @@ export class RecipeBusiness {
             const newRecipe = new Recipe(input.title, input.description, createdAt, tokenIsValid.id)
             
             await this.recipeDatabase.createRecipe(newRecipe)
+
+        } catch (err: any) {
+            throw new CustomError(err.statusCode, err.message)
+        }
+    }
+
+
+    getRecipes = async (token: string): Promise<Recipe[]> => {
+        try {
+            if (!token) {
+                throw new MissingToken()
+            }
+
+            const authenticator = new Authenticator()
+            const tokenIsValid = await authenticator.getTokenData(token)
+
+            if (!tokenIsValid) {
+                throw new Unauthorized()
+            }
+            
+            const followingUsers = await this.userDatabase.getFollowingUsers(tokenIsValid.id)
+    
+            const result: Recipe[] = []
+            for (let item of followingUsers) {
+                const recipe = await this.recipeDatabase.getRecipes(item.fk_user_id)
+                result.push(...recipe)
+            }
+
+            return result
 
         } catch (err: any) {
             throw new CustomError(err.statusCode, err.message)

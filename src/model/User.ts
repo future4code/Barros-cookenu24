@@ -41,3 +41,7 @@ export interface insertFollowerDTO {
     fk_user_id: string,
     fk_follower_id: string
 }
+
+export interface returnFollowingUsersDTO {
+    fk_user_id: string
+}
