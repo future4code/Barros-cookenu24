@@ -21,4 +21,16 @@ export class RecipeController {
             res.status(err.statusCode || 400).send(err.message || err.sqlMessage)
         }
     }
+
+
+    getRecipes = async (req: Request, res: Response): Promise<void> => {
+        try {
+            const token = req.headers.authorization as string
+            const result = await this.recipeBusiness.getRecipes(token)
+            res.status(200).send(result)
+            
+        } catch (err: any) {
+            res.status(err.statusCode || 400).send(err.message || err.sqlMessage)
+        }
+    }
 }
