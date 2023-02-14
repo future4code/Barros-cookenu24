@@ -26,6 +26,12 @@ Content-Type: application/json
 
 
 ###
+GET http://localhost:3003/users/sf563-kufq7A-H56k8-qw86a-se6f44-gjl5
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjJhYzA5NWIxLTc3NmYtNDFkNC05NDM1LTVhMmNmZDEwZmM2MiIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NzY0MTQ5NzMsImV4cCI6MTY3NjQxODU3M30.cV5r8Oiq0iLzfGJf6rVAG2SMIVB0TGlXFBNie-i0g7c
+Content-Type: application/json
+
+
+###
 POST http://localhost:3003/recipes/create
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjJhYzA5NWIxLTc3NmYtNDFkNC05NDM1LTVhMmNmZDEwZmM2MiIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NzYzMzAzNDgsImV4cCI6MTY3NjMzMzk0OH0._9t7J-N_Tz43p2Gzp_sHc0P_iOJDG9jOeiSysLAtAlY
 Content-Type: application/json

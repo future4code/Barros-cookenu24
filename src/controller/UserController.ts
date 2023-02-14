@@ -69,4 +69,20 @@ export class UserController {
             res.status(err.statusCode || 400).send(err.message || err.sqlMessage)
         }
     }
+
+
+    getUserById = async (req: Request, res: Response): Promise<void> => {
+        try {
+            const input: inputFollowUserDTO = {
+                userId: req.params.userId,
+                token: req.headers.authorization as string
+            }
+
+            const result = await this.userBusiness.getUserById(input)
+            res.status(200).send(result)
+            
+        } catch (err: any) {
+            res.status(err.statusCode || 400).send(err.message || err.sqlMessage)
+        }
+    }
 }
