@@ -35,9 +35,27 @@ export class UserDatabase extends BaseDatabase implements UserRepository {
     }
 
 
+    unfollowUser = async (userId: string): Promise<void> => {
+        try {
+            await BaseDatabase.connection("cookenu_followers").del().where("fk_user_id", userId)
+        } catch (err: any) {
+            throw new CustomError(err.statusCode, err.message)
+        }
+    }
+
+
     getFollowingUsers = async (id: string): Promise<returnFollowingUsersDTO[]> => {
         try {
             return await BaseDatabase.connection("cookenu_followers").select("fk_user_id").where("fk_follower_id", id)
+        } catch (err: any) {
+            throw new CustomError(err.statusCode, err.message)
+        }
+    }
+
+
+    searchFollowers = async (userId: string, followerId: string): Promise<any> => {
+        try {
+            return await BaseDatabase.connection("cookenu_followers").select().where({"fk_user_id": userId, "fk_follower_id": followerId})
         } catch (err: any) {
             throw new CustomError(err.statusCode, err.message)
         }

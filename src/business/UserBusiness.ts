@@ -1,5 +1,5 @@
 import { CustomError } from "../error/CustomError"
-import { DuplicateEmail, IncorrectPassword, InvalidEmail, InvalidPassword, InvalidUserId, InvalidUserRole, MissingEmail, MissingPassword, MissingRole, MissingToken, MissingUserId, MissingUserName, Unauthorized, UserNotFound } from "../error/userErrors"
+import { DuplicateEmail, DuplicateFollow, IncorrectPassword, InvalidEmail, InvalidPassword, InvalidUserId, InvalidUserRole, MissingEmail, MissingPassword, MissingRole, MissingToken, MissingUserId, MissingUserName, NotPossibleToUnfollow, Unauthorized, UserNotFound } from "../error/userErrors"
 import { inputLoginDTO, inputSignupDTO, User, returnUserInfoDTO, inputFollowUserDTO, insertFollowerDTO } from "../model/User"
 import { Authenticator } from "../services/Authenticator"
 import { HashManager } from "../services/HashManager"
@@ -148,6 +148,11 @@ export class UserBusiness {
                 throw new InvalidUserId()
             }
 
+            const findUser = await this.userDatabase.searchFollowers(input.userId, tokenIsValid.id)
+            if (findUser.length > 0) {
+                throw new DuplicateFollow()
+            }
+
             const id = await new IdGenerator().generateId()
 
             const newFollower: insertFollowerDTO = {
@@ -157,6 +162,45 @@ export class UserBusiness {
             }
 
             await this.userDatabase.followUser(newFollower)
+
+        } catch (err: any) {
+            throw new CustomError(err.statusCode, err.message)
+        }
+    }
+
+
+    unfollowUser = async (input: inputFollowUserDTO): Promise<void> => {
+        try {
+            if (!input.token) {
+                throw new MissingToken()
+            }
+
+            if (!input.userId) {
+                throw new MissingUserId()
+            }
+
+            const userIdExists = await this.userDatabase.getUserBy("id", input.userId)
+            if (!userIdExists) {
+                throw new UserNotFound()
+            }
+
+            const authenticator = new Authenticator()
+            const tokenIsValid = await authenticator.getTokenData(input.token)
+
+            if (!tokenIsValid) {
+                throw new Unauthorized()
+            }
+
+            if (tokenIsValid.id === input.userId) {
+                throw new InvalidUserId()
+            }
+
+            const findUser = await this.userDatabase.searchFollowers(input.userId, tokenIsValid.id)
+            if (findUser.length === 0) {
+                throw new NotPossibleToUnfollow()
+            }
+
+            await this.userDatabase.unfollowUser(input.userId)
 
         } catch (err: any) {
             throw new CustomError(err.statusCode, err.message)

@@ -58,12 +58,28 @@ export class UserController {
     followUser = async (req: Request, res: Response): Promise<void> => {
         try {
             const input: inputFollowUserDTO = {
-                userId: req.params.userId,
+                userId: req.body.userId,
                 token: req.headers.authorization as string
             }
 
             await this.userBusiness.followUser(input)
             res.status(201).send(`Success! The user is now following the user id ${input.userId}.`)
+            
+        } catch (err: any) {
+            res.status(err.statusCode || 400).send(err.message || err.sqlMessage)
+        }
+    }
+
+
+    unfollowUser = async (req: Request, res: Response): Promise<void> => {
+        try {
+            const input: inputFollowUserDTO = {
+                userId: req.body.userId,
+                token: req.headers.authorization as string
+            }
+
+            await this.userBusiness.unfollowUser(input)
+            res.status(201).send(`Success! The user has unfollowed the user id ${input.userId}.`)
             
         } catch (err: any) {
             res.status(err.statusCode || 400).send(err.message || err.sqlMessage)

@@ -11,6 +11,7 @@ const userController = new UserController(userBusiness)
 
 userRouter.post("/signup", userController.signup)
 userRouter.post("/login", userController.login)
-userRouter.post("/:userId", userController.followUser)
+userRouter.post("/follow", userController.followUser)
+userRouter.post("/unfollow", userController.unfollowUser)
 userRouter.get("/:userId", userController.getUserById)
 userRouter.get("/account", userController.getUserInfo)

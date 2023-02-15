@@ -84,3 +84,15 @@ export class InvalidUserId extends CustomError {
         super(401, "The user cannot follow his/her own account.")
     }
 }
+
+export class DuplicateFollow extends CustomError {
+    constructor () {
+        super(422, "The user cannot follow the same account twice.")
+    }
+}
+
+export class NotPossibleToUnfollow extends CustomError {
+    constructor () {
+        super(422, "The user cannot unfollow an account that he/she is not following.")
+    }
+}
