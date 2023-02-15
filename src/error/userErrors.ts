@@ -120,3 +120,4 @@ export class userNotAllowedToDeleteAccount extends CustomError {
         super(401, "A user can only delete an account if he/she is an ADMIN.")
     }
 }
+

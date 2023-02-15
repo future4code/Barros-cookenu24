@@ -2,10 +2,10 @@ POST http://localhost:3003/users/signup
 Content-Type: application/json
 
 {
-    "email": "renata_vieira@hotmail.com",
-    "name": "Renata Vieira",
+    "email": "joaopedro.dallagnol@gmail.com",
+    "name": "João Pedro Dallagnol",
     "password": "123456",
-    "role": "NORMAL"
+    "role": "ADMIN"
 }
 
 
@@ -83,6 +83,13 @@ Content-Type: application/json
     "title": "teste3",
     "description": "descrição 2"
 }
+
+
+###
+DELETE http://localhost:3003/recipes/7
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjBmN2ZhY2NjLWQ0YjAtNDE2Mi1hMzBkLWVkZDBiM2UyZmMyYSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY3NjUwMTQ3NiwiZXhwIjoxNjc2NTA1MDc2fQ.L_EVnVMd_a893Tb-ks3cBWI26XdretrFb5K8PZKX_8g
+Content-Type: application/json
+
 
 ###
 GET http://localhost:3003/recipes
