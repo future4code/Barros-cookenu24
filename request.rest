@@ -53,7 +53,7 @@ Content-Type: application/json
 
 ###
 POST http://localhost:3003/recipes/create
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjJhYzA5NWIxLTc3NmYtNDFkNC05NDM1LTVhMmNmZDEwZmM2MiIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NzYzMzAzNDgsImV4cCI6MTY3NjMzMzk0OH0._9t7J-N_Tz43p2Gzp_sHc0P_iOJDG9jOeiSysLAtAlY
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjJhYzA5NWIxLTc3NmYtNDFkNC05NDM1LTVhMmNmZDEwZmM2MiIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NzY1MDAyMTIsImV4cCI6MTY3NjUwMzgxMn0.fH5N11TkVtLUwvm4WAuNVvU8xwFQR-8baNxLu2EtdoM
 Content-Type: application/json
 
 {
@@ -61,6 +61,16 @@ Content-Type: application/json
     "description": "descrição teste"
 }
 
+
+###
+PUT http://localhost:3003/recipes/6
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjJhYzA5NWIxLTc3NmYtNDFkNC05NDM1LTVhMmNmZDEwZmM2MiIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NzY1MDAyMTIsImV4cCI6MTY3NjUwMzgxMn0.fH5N11TkVtLUwvm4WAuNVvU8xwFQR-8baNxLu2EtdoM
+Content-Type: application/json
+
+{
+    "title": "teste3",
+    "description": "descrição 2"
+}
 
 ###
 GET http://localhost:3003/recipes
