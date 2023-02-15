@@ -1,6 +1,6 @@
 import { Request, Response } from "express"
 import { RecipeBusiness } from "../business/RecipeBusiness"
-import { inputCreateRecipeDTO, inputGetRecipeDTO } from "../model/Recipe"
+import { inputCreateRecipeDTO, inputEditRecipeDTO, inputGetRecipeDTO } from "../model/Recipe"
 
 
 export class RecipeController {
@@ -44,6 +44,24 @@ export class RecipeController {
 
             const result = await this.recipeBusiness.getRecipeById(input)
             res.status(200).send(result)
+            
+        } catch (err: any) {
+            res.status(err.statusCode || 400).send(err.message || err.sqlMessage)
+        }
+    }
+
+
+    editRecipe = async (req: Request, res: Response): Promise<void> => {
+        try {
+            const input: inputEditRecipeDTO = {
+                id: req.params.id,
+                title: req.body.title,
+                description: req.body.description,
+                token: req.headers.authorization as string
+            }
+
+            await this.recipeBusiness.editRecipe(input)
+            res.status(200).send("Success! The recipe has been edited.")
             
         } catch (err: any) {
             res.status(err.statusCode || 400).send(err.message || err.sqlMessage)

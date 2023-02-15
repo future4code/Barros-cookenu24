@@ -96,3 +96,16 @@ export class NotPossibleToUnfollow extends CustomError {
         super(422, "The user cannot unfollow an account that he/she is not following.")
     }
 }
+
+export class unauthorizedUserRole extends CustomError {
+    constructor () {
+        super(401, "Only normal users can edit their recipes.")
+    }
+}
+
+export class userNotAllowedToEditRecipe extends CustomError {
+    constructor () {
+        super(401, "The user can only edit his/her own recipes.")
+    }
+}
+

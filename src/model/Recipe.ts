@@ -17,3 +17,17 @@ export interface inputGetRecipeDTO {
     id: string,
     token: string
 }
+
+export interface inputEditRecipeDTO {
+    id: string,
+    title: string,
+    description: string,
+    token: string
+}
+
+export interface updateRecipeDTO {
+    id: string,
+    title: string,
+    description: string
+}
+
