@@ -6,4 +6,5 @@ export interface RecipeRepository {
     getRecipes (userId: string): Promise<Recipe[]>
     getRecipeById (id: string): Promise<any>
     editRecipe (updateRecipe: updateRecipeDTO): Promise<void>
+    deleteRecipe (id: string): Promise<void>
 }
