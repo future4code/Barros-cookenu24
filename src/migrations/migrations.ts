@@ -33,7 +33,8 @@ const createTables = () => connection.raw(`
 
 const insertValues = () => connection.raw(`
 
-    INSERT INTO cookenu_users VALUES ("sd4iu-6r84cd-askjbdaj-564sd46ad-kjsd", "fran_hahn@hotmail.com", "Francine Hahn", "123456", "NORMAL"),
+    INSERT INTO cookenu_users VALUES
+    ("sd4iu-6r84cd-askjbdaj-564sd46ad-kjsd", "fran_hahn@hotmail.com", "Francine Hahn", "123456", "NORMAL"),
     ("987DF-500Zg5A-8gud9-ssds-k65ZSA-HS5A", "mariasilva@gmail.com", "Maria Silva", "123456", "ADMIN"),
     ("sf563-kufq7A-H56k8-qw86a-se6f44-gjl5", "luanbastos@gmail.com", "Luan Bastos", "123456", "NORMAL");
 

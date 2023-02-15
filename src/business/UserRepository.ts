@@ -8,4 +8,5 @@ export interface UserRepository {
     unfollowUser (userId: string): Promise<void>
     getFollowingUsers (id: string): Promise<returnFollowingUsersDTO[]>
     searchFollowers (userId: string, followerId: string): Promise<any>
+    deleteAccount (userId: string): Promise<void>
 }

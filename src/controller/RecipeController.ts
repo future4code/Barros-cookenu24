@@ -61,7 +61,23 @@ export class RecipeController {
             }
 
             await this.recipeBusiness.editRecipe(input)
-            res.status(200).send("Success! The recipe has been edited.")
+            res.status(201).send("Success! The recipe has been edited.")
+            
+        } catch (err: any) {
+            res.status(err.statusCode || 400).send(err.message || err.sqlMessage)
+        }
+    }
+
+
+    deleteRecipe = async (req: Request, res: Response): Promise<void> => {
+        try {
+            const input: inputGetRecipeDTO = {
+                id: req.params.id,
+                token: req.headers.authorization as string
+            }
+
+            await this.recipeBusiness.deleteRecipe(input)
+            res.status(200).send("Success! The recipe has been deleted.")
             
         } catch (err: any) {
             res.status(err.statusCode || 400).send(err.message || err.sqlMessage)

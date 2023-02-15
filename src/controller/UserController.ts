@@ -1,6 +1,6 @@
 import { Request, Response } from "express"
 import { UserBusiness } from "../business/UserBusiness"
-import { inputFollowUserDTO, inputLoginDTO, inputSignupDTO } from "../model/User"
+import { inputDeleteAccountDTO, inputFollowUserDTO, inputLoginDTO, inputSignupDTO } from "../model/User"
 
 
 export class UserController {
@@ -96,6 +96,22 @@ export class UserController {
 
             const result = await this.userBusiness.getUserById(input)
             res.status(200).send(result)
+            
+        } catch (err: any) {
+            res.status(err.statusCode || 400).send(err.message || err.sqlMessage)
+        }
+    }
+
+
+    deleteAccount = async (req: Request, res: Response): Promise<void> => {
+        try {
+            const input: inputDeleteAccountDTO = {
+                userId: req.params.userId,
+                token: req.headers.authorization as string
+            }
+
+            await this.userBusiness.deleteAccount(input)
+            res.status(201).send("Success! The account has been deleted.")
             
         } catch (err: any) {
             res.status(err.statusCode || 400).send(err.message || err.sqlMessage)

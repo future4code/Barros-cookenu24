@@ -1,6 +1,6 @@
 import { CustomError } from "../error/CustomError"
-import { DuplicateEmail, DuplicateFollow, IncorrectPassword, InvalidEmail, InvalidPassword, InvalidUserId, InvalidUserRole, MissingEmail, MissingPassword, MissingRole, MissingToken, MissingUserId, MissingUserName, NotPossibleToUnfollow, Unauthorized, UserNotFound } from "../error/userErrors"
-import { inputLoginDTO, inputSignupDTO, User, returnUserInfoDTO, inputFollowUserDTO, insertFollowerDTO } from "../model/User"
+import { DuplicateEmail, DuplicateFollow, IncorrectPassword, InvalidEmail, InvalidPassword, InvalidUserId, InvalidUserRole, MissingEmail, MissingPassword, MissingRole, MissingToken, MissingUserId, MissingUserName, NotPossibleToUnfollow, Unauthorized, userNotAllowedToDeleteAccount, UserNotFound } from "../error/userErrors"
+import { inputLoginDTO, inputSignupDTO, User, returnUserInfoDTO, inputFollowUserDTO, insertFollowerDTO, inputDeleteAccountDTO, USER_ROLE } from "../model/User"
 import { Authenticator } from "../services/Authenticator"
 import { HashManager } from "../services/HashManager"
 import { IdGenerator } from "../services/IdGenerator"
@@ -237,6 +237,40 @@ export class UserBusiness {
             }
 
             return result
+
+        } catch (err: any) {
+            throw new CustomError(err.statusCode, err.message)
+        }
+    }
+
+
+    deleteAccount = async (input: inputDeleteAccountDTO): Promise<void> => {
+        try {
+            if (!input.token) {
+                throw new MissingToken()
+            }
+
+            if (!input.userId) {
+                throw new MissingUserId()
+            }
+
+            const userIdExists = await this.userDatabase.getUserBy("id", input.userId)
+            if (!userIdExists) {
+                throw new UserNotFound()
+            }
+
+            const authenticator = new Authenticator()
+            const tokenIsValid = await authenticator.getTokenData(input.token)
+
+            if (!tokenIsValid) {
+                throw new Unauthorized()
+            }
+
+            if (tokenIsValid.role.toUpperCase() !== USER_ROLE.ADMIN) {
+                throw new userNotAllowedToDeleteAccount()
+            }
+
+            await this.userDatabase.deleteAccount(input.userId)
 
         } catch (err: any) {
             throw new CustomError(err.statusCode, err.message)
