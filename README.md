@@ -10,6 +10,17 @@ API REST developed with the objective of simulating a social media in which the 
 ## ☑️Requests
 - SignUp
 - Login
+- Delete Account
+- Get Account Information
+- Get Another User's Account Information
+- Follow An Account
+- Unfollow An Account
+- Create Recipe
+- Edit Recipe
+- Delete Recipe
+- Get Recipes
+- Get Recipe By Id
+- Recover Password
 
 ## 💻Technologies
 - Node.js
