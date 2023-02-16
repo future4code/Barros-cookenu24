@@ -64,6 +64,10 @@ export class RecipeBusiness {
                 result.push(...recipe)
             }
 
+            if (result.length === 0) {
+                throw new NoRecipeFound()
+            }
+
             return result
 
         } catch (err: any) {

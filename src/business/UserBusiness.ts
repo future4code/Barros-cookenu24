@@ -182,6 +182,7 @@ export class UserBusiness {
             }
 
             const userIdExists = await this.userDatabase.getUserBy("id", input.userId)
+            
             if (!userIdExists) {
                 throw new UserNotFound()
             }

@@ -49,8 +49,8 @@ Content-Type: application/json
 
 
 ### UNFOLLOW
-POST http://localhost:3003/users/unfollow
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjJhYzA5NWIxLTc3NmYtNDFkNC05NDM1LTVhMmNmZDEwZmM2MiIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NzY0MTczMTQsImV4cCI6MTY3NjQyMDkxNH0.3__Ktmx6JBNqni9zEqecJsPKJg-r-b6gzgaQozQSK5Y
+DELETE http://localhost:3003/users/unfollow
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InNkNGl1LTZyODRjZC1hc2tqYmRhai01NjRzZDQ2YWQta2pzZCIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NzY1OTAwOTcsImV4cCI6MTY3NjU5MzY5N30.NU888hpEDdxqKM1KRGRojxAGvRHl51OO-woj91n_yiA
 Content-Type: application/json
 
 {

@@ -12,8 +12,11 @@ const userController = new UserController(userBusiness)
 userRouter.post("/signup", userController.signup)
 userRouter.post("/login", userController.login)
 userRouter.post("/follow", userController.followUser)
-userRouter.post("/unfollow", userController.unfollowUser)
+
 userRouter.get("/account", userController.getUserInfo)
 userRouter.get("/:userId", userController.getUserById)
+
 userRouter.delete("/:userId", userController.deleteAccount)
+userRouter.delete("/unfollow", userController.unfollowUser)
+
 userRouter.put("/recoverPassword", userController.recoverPassword)
