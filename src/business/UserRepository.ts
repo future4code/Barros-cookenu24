@@ -1,4 +1,4 @@
-import { insertFollowerDTO, returnFollowingUsersDTO, User } from "../model/User"
+import { insertFollowerDTO, returnFollowingUsersDTO, updatePasswordDTO, User } from "../model/User"
 
 
 export interface UserRepository {
@@ -9,4 +9,5 @@ export interface UserRepository {
     getFollowingUsers (id: string): Promise<returnFollowingUsersDTO[]>
     searchFollowers (userId: string, followerId: string): Promise<any>
     deleteAccount (userId: string): Promise<void>
+    recoverPassword (updatePassword: updatePasswordDTO): Promise<void>
 }

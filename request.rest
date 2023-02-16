@@ -15,8 +15,8 @@ POST http://localhost:3003/users/login
 Content-Type: application/json
 
 {
-    "email": "joaopedro.dallagnol@gmail.com",
-    "password": "123456"
+    "email": "fran_hahn@hotmail.com",
+    "password": "5sc8osgein"
 }
 
 
@@ -96,3 +96,12 @@ Content-Type: application/json
 GET http://localhost:3003/recipes/1
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjJhYzA5NWIxLTc3NmYtNDFkNC05NDM1LTVhMmNmZDEwZmM2MiIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NzY0MTYzMTMsImV4cCI6MTY3NjQxOTkxM30.8UT57VuKUCQVtqARp4v6OjFn8y0upwpcSHo-AKWyIW0
 Content-Type: application/json
+
+
+### RECOVER PASSWORD
+PUT http://localhost:3003/users/recoverPassword
+Content-Type: application/json
+
+{
+    "email": "contato@barkwhine.com.br"
+}

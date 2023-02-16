@@ -1,6 +1,6 @@
 import { UserRepository } from "../business/UserRepository"
 import { CustomError } from "../error/CustomError"
-import { insertFollowerDTO, returnFollowingUsersDTO, User } from "../model/User"
+import { insertFollowerDTO, returnFollowingUsersDTO, updatePasswordDTO, User } from "../model/User"
 import { BaseDatabase } from "./BaseDatabase"
 
 
@@ -67,6 +67,15 @@ export class UserDatabase extends BaseDatabase implements UserRepository {
             await BaseDatabase.connection("cookenu_recipes").delete().where("fk_user_id", userId)
             await BaseDatabase.connection("cookenu_followers").delete().where("fk_follower_id", userId)
             await BaseDatabase.connection(this.TABLE_NAME).delete().where("id", userId)
+        } catch (err: any) {
+            throw new CustomError(err.statusCode, err.message)
+        }
+    }
+
+
+    recoverPassword = async (updatePassword: updatePasswordDTO): Promise<void> => {
+        try {
+            await BaseDatabase.connection(this.TABLE_NAME).update("password", updatePassword.password).where("id", updatePassword.id)
         } catch (err: any) {
             throw new CustomError(err.statusCode, err.message)
         }

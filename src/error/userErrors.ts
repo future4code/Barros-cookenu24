@@ -25,6 +25,12 @@ export class MissingEmail extends CustomError {
     }
 }
 
+export class EmailNotFound extends CustomError {
+    constructor () {
+        super(404, "Email not found.")
+    }
+}
+
 export class MissingPassword extends CustomError {
     constructor () {
         super(422, "Provide the password.")
