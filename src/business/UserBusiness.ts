@@ -1,6 +1,6 @@
 import { CustomError } from "../error/CustomError"
 import { DuplicateEmail, DuplicateFollow, EmailNotFound, IncorrectPassword, InvalidEmail, InvalidPassword, InvalidUserId, InvalidUserRole, MissingEmail, MissingPassword, MissingRole, MissingToken, MissingUserId, MissingUserName, NotPossibleToUnfollow, Unauthorized, userNotAllowedToDeleteAccount, UserNotFound } from "../error/userErrors"
-import { inputLoginDTO, inputSignupDTO, User, returnUserInfoDTO, inputFollowUserDTO, insertFollowerDTO, inputDeleteAccountDTO, USER_ROLE, updatePasswordDTO } from "../model/User"
+import { inputLoginDTO, inputSignupDTO, User, returnUserInfoDTO, inputFollowUserDTO, insertFollowerDTO, inputDeleteAccountDTO, USER_ROLE, updatePasswordDTO, inputGetUserByIdDTO } from "../model/User"
 import { Authenticator } from "../services/Authenticator"
 import { HashManager } from "../services/HashManager"
 import { IdGenerator } from "../services/IdGenerator"
@@ -210,7 +210,7 @@ export class UserBusiness {
     }
 
 
-    getUserById = async (input: inputFollowUserDTO): Promise<returnUserInfoDTO> => {
+    getUserById = async (input: inputGetUserByIdDTO): Promise<returnUserInfoDTO> => {
         try {
             if (!input.token) {
                 throw new MissingToken()

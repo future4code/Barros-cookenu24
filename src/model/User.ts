@@ -36,6 +36,11 @@ export interface inputFollowUserDTO {
     token: string
 }
 
+export interface inputGetUserByIdDTO {
+    userId: string,
+    token: string
+}
+
 export interface inputDeleteAccountDTO {
     userId: string,
     token: string

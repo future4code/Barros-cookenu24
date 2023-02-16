@@ -1,6 +1,6 @@
 import { Request, Response } from "express"
 import { UserBusiness } from "../business/UserBusiness"
-import { inputDeleteAccountDTO, inputFollowUserDTO, inputLoginDTO, inputSignupDTO } from "../model/User"
+import { inputDeleteAccountDTO, inputFollowUserDTO, inputGetUserByIdDTO, inputLoginDTO, inputSignupDTO } from "../model/User"
 
 
 export class UserController {
@@ -89,7 +89,7 @@ export class UserController {
 
     getUserById = async (req: Request, res: Response): Promise<void> => {
         try {
-            const input: inputFollowUserDTO = {
+            const input: inputGetUserByIdDTO = {
                 userId: req.params.userId,
                 token: req.headers.authorization as string
             }
