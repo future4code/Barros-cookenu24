@@ -1,9 +1,11 @@
 import { CustomError } from "../error/CustomError"
-import { DuplicateEmail, DuplicateFollow, IncorrectPassword, InvalidEmail, InvalidPassword, InvalidUserId, InvalidUserRole, MissingEmail, MissingPassword, MissingRole, MissingToken, MissingUserId, MissingUserName, NotPossibleToUnfollow, Unauthorized, userNotAllowedToDeleteAccount, UserNotFound } from "../error/userErrors"
-import { inputLoginDTO, inputSignupDTO, User, returnUserInfoDTO, inputFollowUserDTO, insertFollowerDTO, inputDeleteAccountDTO, USER_ROLE } from "../model/User"
+import { DuplicateEmail, DuplicateFollow, EmailNotFound, IncorrectPassword, InvalidEmail, InvalidPassword, InvalidUserId, InvalidUserRole, MissingEmail, MissingPassword, MissingRole, MissingToken, MissingUserId, MissingUserName, NotPossibleToUnfollow, Unauthorized, userNotAllowedToDeleteAccount, UserNotFound } from "../error/userErrors"
+import { inputLoginDTO, inputSignupDTO, User, returnUserInfoDTO, inputFollowUserDTO, insertFollowerDTO, inputDeleteAccountDTO, USER_ROLE, updatePasswordDTO } from "../model/User"
 import { Authenticator } from "../services/Authenticator"
 import { HashManager } from "../services/HashManager"
 import { IdGenerator } from "../services/IdGenerator"
+import { transporter } from "../services/mailTransporter"
+import { PasswordGenerator } from "../services/PasswordGenerator"
 import { UserRepository } from "./UserRepository"
 
 
@@ -271,6 +273,42 @@ export class UserBusiness {
             }
 
             await this.userDatabase.deleteAccount(input.userId)
+
+        } catch (err: any) {
+            throw new CustomError(err.statusCode, err.message)
+        }
+    }
+
+
+    recoverPassword = async (email: string): Promise<void> => {
+        try {
+            if (!email) {
+                throw new MissingEmail()
+            }
+        
+            const emailExists = await this.userDatabase.getUserBy("email", email)
+            if (!emailExists) {
+                throw new EmailNotFound()
+            }
+
+            const newPassword = new PasswordGenerator().generatePassword()
+            const hashManager = new HashManager()
+            const hashPassword = await hashManager.generateHash(newPassword)
+
+            const updatePassword: updatePasswordDTO = {
+                id: emailExists.id,
+                password: hashPassword
+            }
+
+            await this.userDatabase.recoverPassword(updatePassword)
+            
+            await transporter.sendMail({
+                from: process.env.NODEMAILER_USER,
+                to: email,
+                subject: "Cookenu - Recuperação de senha",
+                text: `Conforme solicitado, segue a nova senha gerada: ${newPassword}`,
+                html: `<p>Conforme solicitado, segue a nova senha gerada: ${newPassword}</p>`
+            })
 
         } catch (err: any) {
             throw new CustomError(err.statusCode, err.message)

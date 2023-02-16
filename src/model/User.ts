@@ -50,3 +50,8 @@ export interface insertFollowerDTO {
 export interface returnFollowingUsersDTO {
     fk_user_id: string
 }
+
+export interface updatePasswordDTO {
+    id: string,
+    password: string
+}
