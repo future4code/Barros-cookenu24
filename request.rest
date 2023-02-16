@@ -103,5 +103,5 @@ PUT http://localhost:3003/users/recoverPassword
 Content-Type: application/json
 
 {
-    "email": "contato@barkwhine.com.br"
+    "email": "fran_hahn@hotmail.com"
 }
