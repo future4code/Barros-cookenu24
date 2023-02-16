@@ -1,4 +1,4 @@
-enum USER_ROLE {
+export enum USER_ROLE {
     ADMIN = "ADMIN",
     NORMAL = "NORMAL"
 }
@@ -32,6 +32,11 @@ export interface returnUserInfoDTO {
 }
 
 export interface inputFollowUserDTO {
+    userId: string,
+    token: string
+}
+
+export interface inputDeleteAccountDTO {
     userId: string,
     token: string
 }

@@ -60,4 +60,15 @@ export class UserDatabase extends BaseDatabase implements UserRepository {
             throw new CustomError(err.statusCode, err.message)
         }
     }
+
+
+    deleteAccount = async (userId: string): Promise<void> => {
+        try {
+            await BaseDatabase.connection("cookenu_recipes").delete().where("fk_user_id", userId)
+            await BaseDatabase.connection("cookenu_followers").delete().where("fk_follower_id", userId)
+            await BaseDatabase.connection(this.TABLE_NAME).delete().where("id", userId)
+        } catch (err: any) {
+            throw new CustomError(err.statusCode, err.message)
+        }
+    }
 }

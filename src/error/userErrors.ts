@@ -115,3 +115,9 @@ export class userNotAllowedToDeleteRecipe extends CustomError {
     }
 }
 
+export class userNotAllowedToDeleteAccount extends CustomError {
+    constructor () {
+        super(401, "A user can only delete an account if he/she is an ADMIN.")
+    }
+}
+

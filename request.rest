@@ -14,9 +14,15 @@ POST http://localhost:3003/users/login
 Content-Type: application/json
 
 {
-    "email": "mari_boeira@gmail.com",
+    "email": "joaopedro.dallagnol@gmail.com",
     "password": "123456"
 }
+
+
+###
+DELETE http://localhost:3003/users/sf563-kufq7A-H56k8-qw86a-se6f44-gjl5
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjBmN2ZhY2NjLWQ0YjAtNDE2Mi1hMzBkLWVkZDBiM2UyZmMyYSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY3NjUwNTI5NiwiZXhwIjoxNjc2NTA4ODk2fQ.dw-YCbpJWpURerjNQYqmWicfbmiWxvf9o4LqsmQmzaA
+Content-Type: application/json
 
 
 ###
@@ -49,6 +55,12 @@ Content-Type: application/json
 {
     "userId": "987DF-500Zg5A-8gud9-ssds-k65ZSA-HS5A"
 }
+
+
+###
+DELETE http://localhost:3003/recipes/7
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjBmN2ZhY2NjLWQ0YjAtNDE2Mi1hMzBkLWVkZDBiM2UyZmMyYSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY3NjUwMTQ3NiwiZXhwIjoxNjc2NTA1MDc2fQ.L_EVnVMd_a893Tb-ks3cBWI26XdretrFb5K8PZKX_8g
+Content-Type: application/json
 
 
 ###
