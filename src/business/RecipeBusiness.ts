@@ -2,6 +2,7 @@ import { CustomError } from "../error/CustomError"
 import { MissingDescription, MissingRecipeId, MissingTitle, NoRecipeFound } from "../error/recipeErrors"
 import { MissingToken, Unauthorized, unauthorizedUserRole, userNotAllowedToDeleteRecipe, userNotAllowedToEditRecipe } from "../error/userErrors"
 import { inputCreateRecipeDTO, inputEditRecipeDTO, inputGetRecipeDTO, Recipe, updateRecipeDTO } from "../model/Recipe"
+import { USER_ROLE } from "../model/User"
 import { Authenticator } from "../services/Authenticator"
 import { RecipeRepository } from "./RecipeRepository"
 import { UserRepository } from "./UserRepository"
@@ -121,7 +122,7 @@ export class RecipeBusiness {
                 throw new Unauthorized()
             }
             
-            if (tokenIsValid.role.toUpperCase() !== "NORMAL") {
+            if (tokenIsValid.role.toUpperCase() !== USER_ROLE.NORMAL) {
                 throw new unauthorizedUserRole()
             }
 
@@ -172,7 +173,7 @@ export class RecipeBusiness {
                 throw new Unauthorized()
             }
 
-            if (tokenIsValid.role.toUpperCase() === "NORMAL" && recipe.fk_user_id !== tokenIsValid.id) {
+            if (tokenIsValid.role.toUpperCase() === USER_ROLE.NORMAL && recipe.fk_user_id !== tokenIsValid.id) {
                 throw new userNotAllowedToDeleteRecipe()
             }
 
