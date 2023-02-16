@@ -37,7 +37,7 @@ export class UserDatabase extends BaseDatabase implements UserRepository {
 
     unfollowUser = async (userId: string): Promise<void> => {
         try {
-            await BaseDatabase.connection("cookenu_followers").del().where("fk_user_id", userId)
+            await BaseDatabase.connection("cookenu_followers").where("fk_user_id", userId).delete()
         } catch (err: any) {
             throw new CustomError(err.statusCode, err.message)
         }

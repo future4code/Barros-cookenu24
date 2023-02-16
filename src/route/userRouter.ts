@@ -13,10 +13,10 @@ userRouter.post("/signup", userController.signup)
 userRouter.post("/login", userController.login)
 userRouter.post("/follow", userController.followUser)
 
-userRouter.get("/account", userController.getUserInfo)
-userRouter.get("/:userId", userController.getUserById)
-
-userRouter.delete("/:userId", userController.deleteAccount)
 userRouter.delete("/unfollow", userController.unfollowUser)
+userRouter.delete("/:userId", userController.deleteAccount)
+
+userRouter.get("/:userId", userController.getUserById)
+userRouter.get("/account", userController.getUserInfo)
 
 userRouter.put("/recoverPassword", userController.recoverPassword)
