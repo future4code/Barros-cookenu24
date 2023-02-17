@@ -95,7 +95,7 @@ export class UserBusiness {
     }
 
 
-    getUserInfo = async (token: string): Promise<returnUserInfoDTO> => {
+    getAccountInfo = async (token: string): Promise<returnUserInfoDTO> => {
         try {
             if (!token) {
                 throw new MissingToken()

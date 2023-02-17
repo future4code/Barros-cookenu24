@@ -42,10 +42,10 @@ export class UserController {
     }
 
 
-    getUserInfo = async (req: Request, res: Response): Promise<void> => {
+    getAccountInfo = async (req: Request, res: Response): Promise<void> => {
         try {
             const token = req.headers.authorization as string
-            const result = await this.userBusiness.getUserInfo(token)
+            const result = await this.userBusiness.getAccountInfo(token)
 
             res.status(200).send(result)
             
