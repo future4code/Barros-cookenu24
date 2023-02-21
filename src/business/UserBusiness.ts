@@ -76,6 +76,9 @@ export class UserBusiness {
             }
 
             const userEmail = await this.userDatabase.getUserBy("email", input.email)
+            if(!userEmail) {
+                throw new EmailNotFound()
+            }
 
             const hashPassword = new HashManager()
             const comparePassword = await hashPassword.compareHash(input.password, userEmail.password)

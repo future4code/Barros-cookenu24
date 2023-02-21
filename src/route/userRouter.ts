@@ -9,14 +9,14 @@ const userDatabase = new UserDatabase()
 const userBusiness = new UserBusiness(userDatabase)
 const userController = new UserController(userBusiness)
 
-userRouter.get("/account", userController.getAccountInfo)
-userRouter.get("/:userId", userController.getUserById)
+userRouter.get("/account", (req,res) => userController.getAccountInfo(req,res))
+userRouter.get("/:userId", (req,res) => userController.getUserById(req,res))
 
-userRouter.post("/signup", userController.signup)
-userRouter.post("/login", userController.login)
-userRouter.post("/follow", userController.followUser)
+userRouter.post("/signup", (req,res) => userController.signup(req,res))
+userRouter.post("/login", (req,res) => userController.login(req,res))
+userRouter.post("/follow", (req,res) => userController.followUser(req,res))
 
-userRouter.delete("/unfollow", userController.unfollowUser)
-userRouter.delete("/:userId", userController.deleteAccount)
+userRouter.delete("/unfollow", (req,res) => userController.unfollowUser(req,res))
+userRouter.delete("/:userId", (req,res) => userController.deleteAccount(req,res))
 
-userRouter.put("/recoverPassword", userController.recoverPassword)
+userRouter.put("/recoverPassword", (req,res) => userController.recoverPassword(req,res))
