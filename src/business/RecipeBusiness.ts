@@ -26,14 +26,10 @@ export class RecipeBusiness {
             }
 
             const authenticator = new Authenticator()
-            const tokenIsValid = await authenticator.getTokenData(input.token)
-
-            if (!tokenIsValid) {
-                throw new Unauthorized()
-            }
+            const tokenData = await authenticator.getTokenData(input.token)
 
             const createdAt = new Date(new Date().toISOString().split("/").reverse().join(","))
-            const newRecipe = new Recipe(input.title, input.description, createdAt, tokenIsValid.id)
+            const newRecipe = new Recipe(input.title, input.description, createdAt, tokenData.id)
             
             await this.recipeDatabase.createRecipe(newRecipe)
 
@@ -50,13 +46,9 @@ export class RecipeBusiness {
             }
 
             const authenticator = new Authenticator()
-            const tokenIsValid = await authenticator.getTokenData(token)
-
-            if (!tokenIsValid) {
-                throw new Unauthorized()
-            }
+            const tokenData = await authenticator.getTokenData(token)
             
-            const followingUsers = await this.userDatabase.getFollowingUsers(tokenIsValid.id)
+            const followingUsers = await this.userDatabase.getFollowingUsers(tokenData.id)
     
             const result: Recipe[] = []
             for (let item of followingUsers) {
@@ -86,11 +78,7 @@ export class RecipeBusiness {
             }
 
             const authenticator = new Authenticator()
-            const tokenIsValid = await authenticator.getTokenData(input.token)
-
-            if (!tokenIsValid) {
-                throw new Unauthorized()
-            }
+            await authenticator.getTokenData(input.token)
             
             const result = await this.recipeDatabase.getRecipeById(input.id)
             if (!result) {
@@ -120,17 +108,13 @@ export class RecipeBusiness {
             }
 
             const authenticator = new Authenticator()
-            const tokenIsValid = await authenticator.getTokenData(input.token)
-
-            if (!tokenIsValid) {
-                throw new Unauthorized()
-            }
+            const tokenData = await authenticator.getTokenData(input.token)
             
-            if (tokenIsValid.role.toUpperCase() !== USER_ROLE.NORMAL) {
+            if (tokenData.role.toUpperCase() !== USER_ROLE.NORMAL) {
                 throw new unauthorizedUserRole()
             }
 
-            if (recipe.fk_user_id !== tokenIsValid.id) {
+            if (recipe.fk_user_id !== tokenData.id) {
                 throw new userNotAllowedToEditRecipe()
             }
 
@@ -171,13 +155,9 @@ export class RecipeBusiness {
             }
 
             const authenticator = new Authenticator()
-            const tokenIsValid = await authenticator.getTokenData(input.token)
+            const tokenData = await authenticator.getTokenData(input.token)
 
-            if (!tokenIsValid) {
-                throw new Unauthorized()
-            }
-
-            if (tokenIsValid.role.toUpperCase() === USER_ROLE.NORMAL && recipe.fk_user_id !== tokenIsValid.id) {
+            if (tokenData.role.toUpperCase() === USER_ROLE.NORMAL && recipe.fk_user_id !== tokenData.id) {
                 throw new userNotAllowedToDeleteRecipe()
             }
 

@@ -105,13 +105,9 @@ export class UserBusiness {
             }
 
             const authenticator = new Authenticator()
-            const tokenIsValid = await authenticator.getTokenData(token)
+            const tokenData = await authenticator.getTokenData(token)
 
-            if (!tokenIsValid) {
-                throw new Unauthorized()
-            }
-
-            const user = await this.userDatabase.getUserBy("id", tokenIsValid.id)
+            const user = await this.userDatabase.getUserBy("id", tokenData.id)
             
             const result: returnUserInfoDTO = {
                 id: user.id,
@@ -143,17 +139,13 @@ export class UserBusiness {
             }
 
             const authenticator = new Authenticator()
-            const tokenIsValid = await authenticator.getTokenData(input.token)
+            const tokenData = await authenticator.getTokenData(input.token)
 
-            if (!tokenIsValid) {
-                throw new Unauthorized()
-            }
-
-            if (tokenIsValid.id === input.userId) {
+            if (tokenData.id === input.userId) {
                 throw new InvalidUserId()
             }
 
-            const findUser = await this.userDatabase.searchFollowers(input.userId, tokenIsValid.id)
+            const findUser = await this.userDatabase.searchFollowers(input.userId, tokenData.id)
             if (findUser.length > 0) {
                 throw new DuplicateFollow()
             }
@@ -163,7 +155,7 @@ export class UserBusiness {
             const newFollower: insertFollowerDTO = {
                 id,
                 fk_user_id: input.userId,
-                fk_follower_id: tokenIsValid.id
+                fk_follower_id: tokenData.id
             }
 
             await this.userDatabase.followUser(newFollower)
@@ -191,17 +183,13 @@ export class UserBusiness {
             }
 
             const authenticator = new Authenticator()
-            const tokenIsValid = await authenticator.getTokenData(input.token)
+            const tokenData = await authenticator.getTokenData(input.token)
 
-            if (!tokenIsValid) {
-                throw new Unauthorized()
-            }
-
-            if (tokenIsValid.id === input.userId) {
+            if (tokenData.id === input.userId) {
                 throw new InvalidUserId()
             }
 
-            const findUser = await this.userDatabase.searchFollowers(input.userId, tokenIsValid.id)
+            const findUser = await this.userDatabase.searchFollowers(input.userId, tokenData.id)
             if (findUser.length === 0) {
                 throw new NotPossibleToUnfollow()
             }
@@ -230,11 +218,7 @@ export class UserBusiness {
             }
 
             const authenticator = new Authenticator()
-            const tokenIsValid = await authenticator.getTokenData(input.token)
-
-            if (!tokenIsValid) {
-                throw new Unauthorized()
-            }
+            await authenticator.getTokenData(input.token)
 
             const result: returnUserInfoDTO = {
                 id: userIdExists.id,
@@ -266,13 +250,9 @@ export class UserBusiness {
             }
 
             const authenticator = new Authenticator()
-            const tokenIsValid = await authenticator.getTokenData(input.token)
+            const tokenData = await authenticator.getTokenData(input.token)
 
-            if (!tokenIsValid) {
-                throw new Unauthorized()
-            }
-
-            if (tokenIsValid.role.toUpperCase() !== USER_ROLE.ADMIN) {
+            if (tokenData.role.toUpperCase() !== USER_ROLE.ADMIN) {
                 throw new userNotAllowedToDeleteAccount()
             }
 
