@@ -79,6 +79,12 @@ export class DuplicateEmail extends CustomError {
     }
 }
 
+export class NoUsersFound extends CustomError {
+    constructor () {
+        super(404, "No users have been found with the given search parameter.")
+    }
+}
+
 export class UserNotFound extends CustomError {
     constructor () {
         super(404, "User not found.")

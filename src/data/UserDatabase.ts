@@ -16,6 +16,15 @@ export class UserDatabase extends BaseDatabase implements UserRepository {
     }
 
 
+    getAllUsers = async (search: string): Promise<any> => {
+        try {
+            return await BaseDatabase.connection(this.TABLE_NAME).select().where("name", "like", `%${search}%`)
+        } catch (err: any) {
+            throw new CustomError(err.statusCode, err.message)
+        }
+    }
+
+
     getUserBy = async (column: string, value: string): Promise<any> => {
         try {
             const result = await BaseDatabase.connection(this.TABLE_NAME).select().where(column, value)

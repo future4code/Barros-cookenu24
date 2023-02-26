@@ -20,6 +20,12 @@ Content-Type: application/json
 }
 
 
+### GET ALL USERS
+GET http://localhost:3003/users?search=uhiuh
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InNkNGl1LTZyODRjZC1hc2tqYmRhai01NjRzZDQ2YWQta2pzZCIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2Nzc0Mzk1ODYsImV4cCI6MTY3NzQ0MzE4Nn0.00y6B9n8OeM-VGdFjSNa1azz-F4KeclKjpW1Htq_mfE
+Content-Type: application/json
+
+
 ### DELETE ACCOUNT
 DELETE http://localhost:3003/users/sf563-kufq7A-H56k8-qw86a-se6f44-gjl5
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjBmN2ZhY2NjLWQ0YjAtNDE2Mi1hMzBkLWVkZDBiM2UyZmMyYSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY3NjUwNTI5NiwiZXhwIjoxNjc2NTA4ODk2fQ.dw-YCbpJWpURerjNQYqmWicfbmiWxvf9o4LqsmQmzaA

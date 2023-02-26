@@ -3,6 +3,7 @@ import { insertFollowerDTO, returnFollowingUsersDTO, updatePasswordDTO, User } f
 
 export interface UserRepository {
     signup (newUser: User): Promise<void>
+    getAllUsers (search: string): Promise<any>
     getUserBy (column: string, value: string): Promise<any>
     followUser (newFollower: insertFollowerDTO): Promise<void>
     unfollowUser (userId: string): Promise<void>

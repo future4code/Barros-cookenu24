@@ -25,6 +25,11 @@ export interface inputLoginDTO {
     password: string
 }
 
+export interface inputGetAllUsersDTO {
+    token: string,
+    search: string
+}
+
 export interface returnUserInfoDTO {
     id: string,
     name: string,
